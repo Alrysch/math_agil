@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gênios Nível 2 V.TESTE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: white;
+        }
+        body {
+            background: #102549;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        main {
+            height: 500px;
+            padding: 1em;
+            position: relative;
+        }
+        #start, #game, #end {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+        #end {
+            gap: 3em;
+        }
+        .title span {
+            color: white;
+        }
+        .title h1 {
+            font-weight: 900;
+            color: yellow;
+            font-size: 1.6em;
+        }
+        .title p {
+            margin-top: 2em;
+            font-weight: 900;
+            font-size: 1.2em;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3em;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .options input {
+            display: none;
+        }
+        .options label {
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            padding: .8em;
+            border: 3px solid white;
+            user-select: none;
+        }
+        .options span, #timer, #result {
+            text-align: center;
+            font-weight: 900;
+            user-select: none;
+        }
+        #timer, #result {
+            font-size: 1.2em;
+            border-radius: 40px;
+            align-items: center;
+        }
+        #result {
+            padding: 7px 30px 0px 30px;
+            color: white;
+            align-items: center;
+        }
+        #timer {
+            border: 2px solid white;
+            padding: 5px 30px;  
+            color: transparent;        
+        }   
+        #level {
+            border: 2px solid white;
+            padding: 5px 30px;
+            font-size: 1.2em;
+            border-radius: 40px;
+            align-items: center;
+            text-align: center;
+            font-weight: 900;
+            user-select: none;
+        }   
+        input:checked ~ label {
+            background-color: green;
+        }
+        
+        .button-div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 3em;
+        }
+        #ok, #iniciar, #reiniciar {
+            width: 40%;
+            height: 50px;
+            background: #004dcf;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #fff;
+            font-weight: 900;
+            user-select: none;
+        }
+        #ok {
+            display: none;
+        }
+        #game h1 {
+            font-size: 3em;
+            text-align: center;
+            color: white;
+            user-select: none;
+        }
+        #game .input-box {
+            width: 100%;
+            height: 50px;
+            margin: 5em 0 2em 0;
+            user-select: none;
+        }
+        #game .info {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 1em;
+        }
+        .input-box input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            border-bottom: 2px solid white;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 500;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        #end h1 {
+            text-align: center;
+        }
+        #end #details {
+            margin-top: 10px;
+            height: 200px;
+            overflow-y: scroll;
+        }
+        #end p {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        #start {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        #game {
+            display: none;
+            width: 100%;
+            height: 100%;
+            cursor: none;
+        }
+        #end {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, .5);
+            border-radius: 10px;
+        }
+        .version {
+            font-size: 0.7em;
+            position: absolute;
+            bottom: 0;
+        }
+        select {
+            background-color: transparent;
+            font-size: 1.2em;
+        }
+        option {
+            background-color: #102549;
+        }
+    </style>
+</head>
+<body onclick="focusTextBox()">
+    <main>
+        <div id="start">
+            <div class="title">
+                <h1><span>PROJETO<br></span>GÊNIOS DA MATEMÁTICA</h1>
+                <p>NÍVEL 2 - (5º e 6º ANOS)</p>
+                <p>TEMPO:</p>
+            </div>           
+            <div class="options">
+                <div>
+                    <input type="radio" id="30" name="interval" value="30">
+                    <label for="30">
+                        <span>
+                            <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none"><path d="M5.06152 12C5.55362 8.05369 8.92001 5 12.9996 5C17.4179 5 20.9996 8.58172 20.9996 13C20.9996 17.4183 17.4179 21 12.9996 21H8M13 13V9M11 3H15M3 15H8M5 18H10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </span>
+                        <span>0:30</span>
+                    </label>
+                </div>
+                <div>
+                    <input type="radio" id="90" name="interval" value="90" checked>
+                    <label for="90">
+                        <span>
+                            <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none"><path d="M5.06152 12C5.55362 8.05369 8.92001 5 12.9996 5C17.4179 5 20.9996 8.58172 20.9996 13C20.9996 17.4183 17.4179 21 12.9996 21H8M13 13V9M11 3H15M3 15H8M5 18H10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </span>
+                        <span>1:30</span>
+                    </label>
+                </div>              
+                <div>
+                    <input type="radio" id="180" name="interval" value="180">
+                    <label for="180">
+                        <span>
+                            <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none"><path d="M5.06152 12C5.55362 8.05369 8.92001 5 12.9996 5C17.4179 5 20.9996 8.58172 20.9996 13C20.9996 17.4183 17.4179 21 12.9996 21H8M13 13V9M11 3H15M3 15H8M5 18H10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </span>
+                        <span>3:00</span>
+                    </label>
+                </div>
+                <div hidden>
+                    <input type="radio" id="infy" name="interval" value="3600">
+                    <label for="infy">
+                        <span>
+                            <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none"><path d="M5.06152 12C5.55362 8.05369 8.92001 5 12.9996 5C17.4179 5 20.9996 8.58172 20.9996 13C20.9996 17.4183 17.4179 21 12.9996 21H8M13 13V9M11 3H15M3 15H8M5 18H10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </span>
+                        <span>1h</span>
+                    </label>
+                </div>                                              
+            </div>
+            <div class="button-div">
+                <button id="iniciar" onclick="startGame()">INICIAR</button>
+            </div>
+            <div class="version">Matemática Ágil (test_version) <br>Creator: Antônio Emanuel</div>
+        </div>
+        <div id="game">
+            <div class="title">
+                <h1 id="equation"></h1>
+            </div>
+            <div class="input-box">
+                <input id="input-text" type="number">
+            </div>
+            <div class="info">
+                <p id="timer">9:99</p>
+                <p id="result"></p>             
+            </div>           
+            <div class="button-div">
+                <button id="ok" onclick="answerCheck()">➔</button>
+            </div>
+        </div>
+        <div id="end">
+            <h1>TEMPO ESGOTADO!</h1>
+            <h1 id="score">TOTAL: 0 ACERTOS</h1>
+            <div id="details">
+
+            </div>
+            <div class="button-div">
+                <button id="iniciar" onclick="history.go(0)">REINICIAR</button>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    const _0x3c0c6a=_0x2298;(function(_0x2ca430,_0x25be61){const _0x22beae=_0x2298,_0x21d17e=_0x2ca430();while(!![]){try{const _0x1097ac=-parseInt(_0x22beae(0x120))/0x1*(-parseInt(_0x22beae(0xfd))/0x2)+-parseInt(_0x22beae(0xeb))/0x3+-parseInt(_0x22beae(0x11e))/0x4*(-parseInt(_0x22beae(0xed))/0x5)+parseInt(_0x22beae(0xfa))/0x6+-parseInt(_0x22beae(0x110))/0x7*(parseInt(_0x22beae(0xfb))/0x8)+-parseInt(_0x22beae(0x104))/0x9+-parseInt(_0x22beae(0xf9))/0xa*(-parseInt(_0x22beae(0x101))/0xb);if(_0x1097ac===_0x25be61)break;else _0x21d17e['push'](_0x21d17e['shift']());}catch(_0x11d558){_0x21d17e['push'](_0x21d17e['shift']());}}}(_0x3b9f,0x3596c));const start=document[_0x3c0c6a(0xf1)](_0x3c0c6a(0x115)),game=document[_0x3c0c6a(0xf1)](_0x3c0c6a(0xef)),end=document[_0x3c0c6a(0xf1)]('end'),inputText=document[_0x3c0c6a(0xf1)](_0x3c0c6a(0x10d)),level=document['getElementById'](_0x3c0c6a(0x121)),result=document['getElementById'](_0x3c0c6a(0x103)),equation=document['getElementById'](_0x3c0c6a(0x10e)),score=document[_0x3c0c6a(0xf1)](_0x3c0c6a(0x119)),details=document['getElementById'](_0x3c0c6a(0x112)),linebreak=document['createElement']('br'),audioCorrect=new Audio(_0x3c0c6a(0xf5)),audioJump=new Audio(_0x3c0c6a(0x100)),timerOver=new Audio(_0x3c0c6a(0x105));function startGame(){const _0x438973=_0x3c0c6a;start[_0x438973(0x11a)][_0x438973(0x108)]=_0x438973(0xf2),game[_0x438973(0x11a)][_0x438973(0x108)]=_0x438973(0x116),timerSelect(),aleaEquat();}var answer,acertos=0x0,a,b,c,d,e,f,g,h,x,y;function aleaNumber(){const _0x14d181=_0x3c0c6a;a=Math[_0x14d181(0xf8)](Math[_0x14d181(0x127)]()*0x8)+0x1,b=Math['floor'](Math['random']()*0xa),c=Math[_0x14d181(0xf8)](Math[_0x14d181(0x127)]()*0xa),d=Math[_0x14d181(0xf8)](Math['random']()*0xa),e=Math[_0x14d181(0xf8)](Math['random']()*0xa),f=Math[_0x14d181(0xf8)](Math[_0x14d181(0x127)]()*0x8)+0x1,g=Math[_0x14d181(0xf8)](Math[_0x14d181(0x127)]()*0xa),h=Math[_0x14d181(0xf8)](Math['random']()*0xa),x=Math[_0x14d181(0xf8)](Math[_0x14d181(0x127)]()*0xc8)+0xa,y=Math[_0x14d181(0xf8)](Math['random']()*0x14)+0x1;return;}var difficult=0x0,n=0x0;function aleaEquat(){const _0x60f2bd=_0x3c0c6a;if(difficult<1.5)switch(n){case 0x0:sum1(),++n;break;case 0x1:sub1(),++n;break;case 0x2:mul1(),n=0x0;break;}else{if(difficult>=1.5&&difficult<0x3)switch(n){case 0x0:div(),++n;break;case 0x1:sub2(),++n;break;case 0x2:mul1(),++n;break;case 0x3:sum2(),++n;break;case 0x4:expression(),n=0x0;break;}else switch(n){case 0x0:sum3(),++n;break;case 0x1:expression(),++n;break;case 0x2:mul2(),++n;break;case 0x3:div(),++n;break;case 0x4:sub2(),n=0x0;break;}}audioJump[_0x60f2bd(0x123)](),focusresetInput();return;}function _0x2298(_0xe36475,_0xaa84f1){const _0x3b9ff4=_0x3b9f();return _0x2298=function(_0x229855,_0x2a59fc){_0x229855=_0x229855-0xeb;let _0x5e118e=_0x3b9ff4[_0x229855];return _0x5e118e;},_0x2298(_0xe36475,_0xaa84f1);}function sum1(){const _0x94706f=_0x3c0c6a;aleaNumber();a+e<0xa&&b+f<0xa&&c+g<0xa?(num1=String(a)+String(b)+String(c),num2=String(e)+String(f)+String(g),num1=parseInt(num1,0xa),num2=parseInt(num2,0xa),num1>num2?equation['innerHTML']=num1+_0x94706f(0x111)+num2:equation[_0x94706f(0xec)]=num2+_0x94706f(0x111)+num1):sum1();answer=num1+num2;return;}function sum2(){const _0x39aac3=_0x3c0c6a;aleaNumber();a+e>0x9&&b+f<0xa&&c+g<0xa&&d+h<0xa?(num1=String(a)+String(b)+String(c),num2=String(e)+String(f)+String(g),num1=parseInt(num1,0xa),num2=parseInt(num2,0xa),num1>num2?equation[_0x39aac3(0xec)]=num1+_0x39aac3(0x111)+num2:equation['innerHTML']=num2+_0x39aac3(0x111)+num1):sum2();answer=num1+num2;return;}function sum3(){const _0x1b0d6a=_0x3c0c6a;aleaNumber();a+e<0xa&&b+f<0x9&&c+g>0x9?(num1=String(a)+String(b)+String(c),num2=String(e)+String(f)+String(g),num1=parseInt(num1,0xa),num2=parseInt(num2,0xa),num1>num2?equation[_0x1b0d6a(0xec)]=num1+'\x20+\x20'+num2:equation[_0x1b0d6a(0xec)]=num2+_0x1b0d6a(0x111)+num1):sum3();answer=num1+num2;return;}function sub1(){const _0x304251=_0x3c0c6a;aleaNumber();b>f&&c>g?(num1=String(a)+String(b)+String(c),num2=String(f)+String(g),num1=parseInt(num1,0xa),num2=parseInt(num2,0xa),equation['innerHTML']=num1+_0x304251(0x109)+num2):sub1();answer=num1-num2;return;}function sub2(){const _0x3b7d1f=_0x3c0c6a;aleaNumber();a>e&&b>f&&c>g?(num1=String(a)+String(b)+String(c),num2=String(e)+String(f)+String(g),num1=parseInt(num1,0xa),num2=parseInt(num2,0xa),equation[_0x3b7d1f(0xec)]=num1+_0x3b7d1f(0x109)+num2):sub2();answer=num1-num2;return;}function mul1(){const _0x525be8=_0x3c0c6a;aleaNumber();(f<=0x5&&f>0x1||f==0xa)&&f*b<0xa?(num1=String(a)+String(b),num2=String(f),num1=parseInt(num1,0xa),num2=parseInt(num2,0xa),equation[_0x525be8(0xec)]=num1+_0x525be8(0x106)+num2):mul1();answer=num1*num2;return;}function mul2(){const _0x391cab=_0x3c0c6a;aleaNumber();(f<=0x5&&f>0x1||f==0xa)&&f*b>0x9?(num1=String(a)+String(b),num2=String(f),num1=parseInt(num1,0xa),num2=parseInt(num2,0xa),equation[_0x391cab(0xec)]=num1+_0x391cab(0x106)+num2):mul2();answer=num1*num2;return;}function div(){const _0x501c2f=_0x3c0c6a;aleaNumber();if(f<=0xa&&f>0x1&&x%f==0x0){equation[_0x501c2f(0xec)]=x+'\x20÷\x20'+f,answer=x/f;return;}else div();return;}function expression(){aleaNumber();(f<=0x5&&f>0x1||f==0xa)&&x<0x32&&y>0x4?(num1=String(y),num2=String(f),num1=parseInt(num1,0xa),num2=parseInt(num2,0xa),equation['innerHTML']=num1+'\x20×\x20'+num2+'\x20+\x20'+x):expression();answer=num1*num2+x;return;}inputText['addEventListener'](_0x3c0c6a(0x114),function(_0x20d8f5){const _0x35d27f=_0x3c0c6a;_0x20d8f5[_0x35d27f(0xf0)]===_0x35d27f(0xf3)&&(_0x20d8f5[_0x35d27f(0x117)](),document[_0x35d27f(0xf1)]('ok')['click']());});function focusresetInput(){const _0x45e46e=_0x3c0c6a;inputText[_0x45e46e(0x113)](),inputText['value']='';}function focusTextBox(){const _0x4897ff=_0x3c0c6a;inputText[_0x4897ff(0x113)]();}function answerCheck(){const _0x2def38=_0x3c0c6a;let _0x165b61=inputText['value'],_0x598f2f=document[_0x2def38(0x122)]('p');if(answer==_0x165b61)result[_0x2def38(0x124)]='CORRETO',result[_0x2def38(0x11a)][_0x2def38(0x12a)]='green',acertos=acertos+0x1,_0x598f2f[_0x2def38(0x124)]=equation[_0x2def38(0x124)]+_0x2def38(0x102)+answer+'\x20['+inputText[_0x2def38(0x10f)]+']',_0x598f2f[_0x2def38(0x11a)][_0x2def38(0xf4)]=_0x2def38(0x11c),audioCorrect[_0x2def38(0x123)]();else{if(_0x165b61=='')result[_0x2def38(0x124)]=_0x2def38(0x10c),result[_0x2def38(0x11a)][_0x2def38(0x12a)]=_0x2def38(0x118),_0x598f2f[_0x2def38(0x124)]=equation[_0x2def38(0x124)]+_0x2def38(0x102)+answer+_0x2def38(0x129),_0x598f2f['style'][_0x2def38(0xf4)]='orange';else _0x165b61=='-1'?endGame():(result['textContent']=_0x2def38(0xf6),result[_0x2def38(0x11a)][_0x2def38(0x12a)]='#D22B2B',_0x598f2f['textContent']=equation['textContent']+_0x2def38(0x102)+answer+'\x20['+inputText[_0x2def38(0x10f)]+']',_0x598f2f['style']['color']=_0x2def38(0x126));}details[_0x2def38(0x125)](_0x598f2f),details[_0x2def38(0x125)](linebreak),setTimeout(function(){const _0xb58996=_0x2def38;result[_0xb58996(0x11a)][_0xb58996(0x12a)]=_0xb58996(0x11f),result['textContent']='',aleaEquat();},0x1f4);acertos==0x1?score[_0x2def38(0x124)]=_0x2def38(0xee)+acertos+_0x2def38(0xff):score[_0x2def38(0x124)]=_0x2def38(0xee)+acertos+_0x2def38(0x11d);return;}function _0x3b9f(){const _0x190005=['1qTQLIQ','level','createElement','play','textContent','appendChild','red','random','FIM','\x20[PULOU]','backgroundColor','138525VepAFm','innerHTML','408515XlEkiX','TOTAL:\x20','game','key','getElementById','none','Enter','color','https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3','ERRADO','interval','floor','10SToydl','1900776SEsbtx','9832HCZLLR','#D22B2B','75182DQVhaU','length','\x20ACERTO','https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3','3713050WIUHnZ','\x20=\x20','result','2536002iPQJbV','https://assets.mixkit.co/active_storage/sfx/2256/2256-preview.mp3','\x20×\x20','checked','display','\x20-\x20','white','timer','PULO','input-text','equation','value','2219SbJjqr','\x20+\x20','details','focus','keypress','start','block','preventDefault','#D35400','score','style','#066B15','green','\x20ACERTOS','12PZPjrx','transparent'];_0x3b9f=function(){return _0x190005;};return _0x3b9f();}function timerSelect(){const _0x45acda=_0x3c0c6a;var _0x1b7eb7=document['getElementsByName'](_0x45acda(0xf7)),_0x14d74b,_0x2af7f5=document['getElementById'](_0x45acda(0x10b));for(var _0x34566d=0x0;_0x34566d<_0x1b7eb7[_0x45acda(0xfe)];_0x34566d++){_0x1b7eb7[_0x34566d][_0x45acda(0x107)]&&(_0x14d74b=_0x1b7eb7[_0x34566d][_0x45acda(0x10f)]);}startTimer(_0x14d74b,_0x2af7f5);}function startTimer(_0x36ebc0,_0x50424c){var _0x178157=_0x36ebc0,_0x573b4b,_0x142ab6;setInterval(function(){const _0xefbbf=_0x2298;var _0x34cb60=_0x36ebc0/_0x178157;_0x573b4b=parseInt(_0x178157/0x3c,0xa),_0x142ab6=parseInt(_0x178157%0x3c,0xa),_0x142ab6=_0x142ab6<0xa?'0'+_0x142ab6:_0x142ab6,_0x50424c[_0xefbbf(0x11a)]['color']=_0xefbbf(0x10a),_0x50424c[_0xefbbf(0x124)]=_0x573b4b+':'+_0x142ab6;if(_0x178157>=0x0){--_0x178157,difficult=_0x34cb60;if(_0x34cb60>=1.5&&_0x34cb60<0x3)_0x50424c[_0xefbbf(0x11a)][_0xefbbf(0x12a)]=_0xefbbf(0x118);else _0x34cb60>=0x3?_0x50424c[_0xefbbf(0x11a)][_0xefbbf(0x12a)]=_0xefbbf(0xfc):_0x50424c[_0xefbbf(0x11a)][_0xefbbf(0x12a)]=_0xefbbf(0x11b);return;}else _0x50424c[_0xefbbf(0x124)]=_0xefbbf(0x128),endGame();},0x3e8);}function endGame(){const _0x1133d2=_0x3c0c6a;game['style'][_0x1133d2(0x108)]=_0x1133d2(0xf2),end[_0x1133d2(0x11a)][_0x1133d2(0x108)]=_0x1133d2(0x116);return;}
+</script>
+</html>
